@@ -1,5 +1,15 @@
+import "dotenv/config";
 import { Context, Telegraf, Markup } from "telegraf";
 import { Update } from "typegram";
+
+import mongoose from "mongoose";
+
+import { recognize } from "./commands/textRecognition";
+
+mongoose.connect(process.env.MONGO_CONNECTION ?? "");
+
+// const kitty = new Cat({ name: "Zildjian" });
+// kitty.save().then(() => console.log("meow"));
 
 const botToken: string = process.env.BOT_TOKEN ?? "";
 
@@ -7,7 +17,7 @@ const bot: Telegraf<Context<Update>> = new Telegraf(botToken);
 
 bot.start((context) => {
   context.reply(`Hello ${context.from.first_name}!`);
-  context.reply(`This is my first bot on Telegram`);
+  context.reply(`This is my first bot on Telegram 🚀`);
 });
 
 bot.help((context) => {
@@ -33,12 +43,11 @@ bot.command("keyboard", (ctx) => {
   );
 });
 
-bot.on("text", (ctx) => {
-  ctx.reply(
-    "You choose the " +
-      (ctx.message.text === "first" ? "First" : "Second") +
-      " Option!"
-  );
+bot.on("text", async (ctx) => {
+  const response = await recognize(ctx.message.text, ctx.from.username);
+
+  ctx.reply(`Luis api response: ${JSON.stringify(response)}`);
+  ctx.reply(`Thank you for your contact ${ctx.from.first_name} ☺️`);
 });
 
 bot.launch();
