@@ -4,12 +4,9 @@ import { Update } from "typegram";
 
 import mongoose from "mongoose";
 
-import { recognize } from "./commands/textRecognition";
+import { text } from "./commands/text";
 
 mongoose.connect(process.env.MONGO_CONNECTION ?? "");
-
-// const kitty = new Cat({ name: "Zildjian" });
-// kitty.save().then(() => console.log("meow"));
 
 const botToken: string = process.env.BOT_TOKEN ?? "";
 
@@ -43,12 +40,7 @@ bot.command("keyboard", (ctx) => {
   );
 });
 
-bot.on("text", async (ctx) => {
-  const response = await recognize(ctx.message.text, ctx.from.username);
-
-  ctx.reply(`Luis api response: ${JSON.stringify(response)}`);
-  ctx.reply(`Thank you for your contact ${ctx.from.first_name} ☺️`);
-});
+bot.on("text", text);
 
 bot.launch();
 

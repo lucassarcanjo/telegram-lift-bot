@@ -1,9 +1,8 @@
-// mapping only useful properties
 export enum Intent {
   AnyoneNotGoing = "anyone.notgoing",
   DriverGoing = "driver.going",
   PassengerGoing = "passenger.going",
-  SettingsBalance = "settings.balance",
+  Balance = "settings.balance",
   None = "None",
 }
 

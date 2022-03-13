@@ -7,7 +7,7 @@ interface RideDoc extends mongoose.Document {
   passengers: string[];
 }
 
-const rideSchema = new mongoose.Schema({
+const schema = new mongoose.Schema({
   datetime: {
     type: Date,
     required: true,
@@ -22,6 +22,6 @@ const rideSchema = new mongoose.Schema({
   },
 });
 
-const Ride = mongoose.model<RideDoc>("Ride", rideSchema);
+const Ride = mongoose.model<RideDoc>("Ride", schema);
 
 export { Ride };
