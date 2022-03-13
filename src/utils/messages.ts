@@ -14,3 +14,12 @@ export const ActionMessage = {
     `Removendo ${name} da lista de confirmados hoje 😩❌`,
   Error: "Não consegui resolver isso sozinho 🤯",
 };
+
+export const GreetingMessage = {
+  Start: "Oi! Eu vou te ajudar a simplificar suas caronas 🚀",
+  BasicCommand:
+    "Digite /help a qualquer momento para conhecer o que posso fazer!",
+  About:
+    "Fui criado para resolver alguns problemas de balanço de caronas para a faculdade. Para saber mais você pode acessar https://bit.ly/3MXaP2L",
+  Creator: "👨🏻‍💻 Lucas Arcanjo",
+};
