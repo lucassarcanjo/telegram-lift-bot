@@ -1,16 +1,19 @@
-import * as attendance from "../services/attendance";
-import { recognize } from "../services/textRecognition";
-
-import { Intent } from "../api/textRecognition";
-import { ActionMessage } from "../utils/messages";
-
 import { Context, NarrowedContext } from "telegraf/typings";
 import { MountMap } from "telegraf/typings/telegram-types";
 
+import * as attendance from "../services/attendance";
+import { recognize } from "../services/textRecognition";
+import { Intent } from "../api/textRecognition";
+import { ActionMessage } from "../utils/messages";
+
+// TODO: check if the passenger already exists on db to get defaults
+// maybe when the driver manifests
 export const text = async (
   context: NarrowedContext<Context, MountMap["text"]>
 ) => {
   const message = context.message;
+
+  if (!message.text) return;
 
   try {
     const userIntent = await recognize(message.text);

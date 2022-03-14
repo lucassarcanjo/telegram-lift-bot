@@ -20,6 +20,6 @@ export const GreetingMessage = {
   BasicCommand:
     "Digite /help a qualquer momento para conhecer o que posso fazer!",
   About:
-    "Fui criado para resolver alguns problemas de balanço de caronas para a faculdade. Para saber mais você pode acessar https://bit.ly/3MXaP2L",
+    "Fui criado para resolver alguns problemas de balanço de caronas para a faculdade. Para saber mais você pode acessar ",
   Creator: "👨🏻‍💻 Lucas Arcanjo",
 };

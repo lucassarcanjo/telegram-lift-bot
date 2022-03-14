@@ -40,6 +40,9 @@ export const passengerGoAction = async (
   return { status: true };
 };
 
+// TODO: fix bugs
+// driver will not go
+// passenger will not go also not works
 export const userNotGoAction = async (
   username: string
 ): Promise<ActionResult<Intent.AnyoneNotGoing>> => {

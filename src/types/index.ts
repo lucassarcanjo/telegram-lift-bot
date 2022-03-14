@@ -1,4 +1,15 @@
+import { Context } from "telegraf";
 import { Intent } from "../api/textRecognition";
+
+export interface BotContext extends Context {
+  session: {
+    monday: boolean | undefined;
+    tuesday: boolean | undefined;
+    wednesday: boolean | undefined;
+    thursday: boolean | undefined;
+    friday: boolean | undefined;
+  };
+}
 
 export type DayOfWeek =
   | "monday"
