@@ -7,12 +7,20 @@ export const save = async (
   username: string,
   classDayWeek: DayOfWeek[]
 ) => {
-  const user = new User({
-    firstName,
-    lastName,
-    username,
-    classDayWeek,
-  });
-  // TODO: check if user with same username already exists on db
-  await user.save();
+  const query = { username };
+
+  await User.updateOne(
+    query,
+    {
+      firstName,
+      lastName,
+      username,
+      classDayWeek,
+    },
+    { upsert: true }
+  );
+};
+
+export const getByUsername = async (username: string) => {
+  return User.find({ username }).exec();
 };

@@ -6,6 +6,7 @@ interface UserDoc extends mongoose.Document {
   lastName: string;
   username: string;
   classDayWeek: DayOfWeek[];
+  updatedAt: string;
 }
 
 const schema = new mongoose.Schema({
@@ -20,6 +21,11 @@ const schema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
+  },
+  updatedAt: {
+    type: Date,
+    required: true,
+    default: Date.now,
   },
   classDayWeek: {
     type: [String],

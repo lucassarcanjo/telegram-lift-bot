@@ -17,6 +17,7 @@ export const text = async (
 
   try {
     const userIntent = await recognize(message.text);
+    console.log(userIntent);
     const username = message.from?.username ?? "";
 
     switch (userIntent) {
