@@ -1,8 +1,8 @@
 import { Markup } from "telegraf";
 import { NarrowedContext } from "telegraf/typings";
 import { MountMap } from "telegraf/typings/telegram-types";
-import { save } from "../services/user";
-import { DayOfWeek, BotContext } from "../types";
+import { getByUsername, save } from "../services/user";
+import { BotContext, DayOfWeek } from "../types";
 
 const showText = (
   condition: boolean | undefined,
@@ -11,9 +11,10 @@ const showText = (
 ) => `${condition ? character : ""} ${message}`;
 
 export const selectDaysOfWeek = (
-  context: NarrowedContext<BotContext, MountMap["text"]>
+  context: NarrowedContext<BotContext, MountMap["text"]>,
+  previousSelected?: BotContext["session"]
 ) => {
-  const days = context.session;
+  const days = previousSelected ?? context.session;
 
   context.reply(
     "Preciso saber quais dias você vai à aula!",
@@ -110,4 +111,24 @@ export const dayConfirm = async (
   );
 
   context.reply("Beleza! Já tá tudo anotado aqui 🧠");
+};
+
+export const retrieveClassDays = async (
+  context: NarrowedContext<BotContext, MountMap["text"]>
+) => {
+  const username = context.from.username ?? context.from.id.toString();
+
+  const [user] = await getByUsername(username);
+
+  if (!user) {
+    return;
+  }
+
+  return {
+    monday: user.classDayWeek.includes("monday"),
+    tuesday: user.classDayWeek.includes("tuesday"),
+    wednesday: user.classDayWeek.includes("wednesday"),
+    thursday: user.classDayWeek.includes("thursday"),
+    friday: user.classDayWeek.includes("friday"),
+  };
 };
