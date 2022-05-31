@@ -18,7 +18,7 @@ export const start = async (
   const [user, ...others] = await getByUsername(username);
 
   if (others?.length > 0) {
-    context.reply("Seu nome está duplicado no banco de dados!");
+    context.reply("Seu nome está duplicado no banco de dados 🤯");
     throw new Error("More than one document with same username has found");
   }
 
